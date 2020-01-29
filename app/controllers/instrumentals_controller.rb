@@ -1,0 +1,2 @@
+class InstrumentalsController < ApplicationController
+end

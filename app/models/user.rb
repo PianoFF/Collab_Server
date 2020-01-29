@@ -6,6 +6,9 @@ class User < ApplicationRecord
   has_one :location 
   has_many :posts
   has_one :vocal
+  has_one :instrumental
+
+  
 
 
 end
