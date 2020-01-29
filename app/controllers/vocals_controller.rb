@@ -1,0 +1,2 @@
+class VocalsController < ApplicationController
+end

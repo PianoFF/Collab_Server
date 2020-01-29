@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :vocals
   resources :posts
   resources :locations
   resources :users
