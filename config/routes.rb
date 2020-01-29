@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   # resources :locations
   # resources :users
 
-  
+  post '/users', to: 'users#create'
+  post '/login', to: 'users#login'
+
+
+  post '/posts', to: 'posts#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
