@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 #user_routes
   post '/users', to: 'users#create'
   post '/login', to: 'users#login'
+  post '/validate', to: 'users#validate'
 
 #post_routes
   post '/posts', to: 'posts#create'

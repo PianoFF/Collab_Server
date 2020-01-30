@@ -19,6 +19,8 @@ class User < ApplicationRecord
   validates :bio_content, length: { maximum: 500}
   
 
-
+  def token 
+    JWT.encode( { user_id: self.id }, ENV['RAILS_SECRET'])
+  end
 
 end

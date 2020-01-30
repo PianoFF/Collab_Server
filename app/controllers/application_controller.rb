@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::API
       before_action :set_current_user
 
-    def issue_token(payload) #called when a user SingsUp / LogsIn. See users_controller
-        JWT.encode(payload, ENV['RAILS_SECRET'])
-    end
+    # def issue_token(payload) #called when a user SingsUp / LogsIn. See users_controller
+    #     JWT.encode(payload, ENV['RAILS_SECRET']) // now in user.rb
+    # end
 
     def decode_token(token)
       JWT.decode(token, ENV['RAILS_SECRET'])[0]
