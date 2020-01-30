@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  def create
+  def signup
     user = User.create(user_params)
 
     if user.valid? 
@@ -22,6 +22,8 @@ class UsersController < ApplicationController
       render json: { error: "Please try again" }, status: :not_acceptable
     end
   end
+
+
 
   def validate 
     #sending localStorage.token to validate if a user's already logged in; if there's a logged in user, it'll send back user object

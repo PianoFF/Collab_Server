@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # resources :users
 
 #user_routes
-  post '/users', to: 'users#create'
+  post '/signup', to: 'users#signup'
   post '/login', to: 'users#login'
   post '/validate', to: 'users#validate'
 
