@@ -4,9 +4,9 @@ class UsersController < ApplicationController
     user = User.create(user_params)
 
     if user.valid? 
-      render json: { user: user, toek: issue_token(user_id: user.id) }
+      render json: { user: user, toek: issue_token(user_id: user.id) }, status: :accepted
     else
-      render json: { errors: user.errors.full_messages }, status: :not_acceptable
+      render json: { errors: user.errors.full_messages }, status: :unauthorized
     end
   end
 
