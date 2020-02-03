@@ -11,7 +11,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def index
+    posts = Post.all 
 
+    render json: posts
+  end
   private
 
   def authorized_only_action
