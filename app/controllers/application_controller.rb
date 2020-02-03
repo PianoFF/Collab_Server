@@ -19,7 +19,7 @@ class ApplicationController < ActionController::API
         if token
             decode_token = decode_token(token)
             #@current_user is then available for all the children controllers
-            @current_user = User.find(decode_token['user_id'])
+            @current_user = User.find_by(id: decode_token['user_id'])
         else
             @current_user = nil 
         end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#signup'
   post '/login', to: 'users#login'
   post '/validate', to: 'users#validate'
+  get '/users', to: 'users#index' 
 
 #post_routes
   post '/posts', to: 'posts#create'
