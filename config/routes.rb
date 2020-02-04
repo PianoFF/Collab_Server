@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 #post_routes
   post '/posts', to: 'posts#create'
   get '/posts', to: 'posts#index'
+  delete '/posts/:id/', to: 'posts#destroy' 
+  
 #message_routes
   post '/messages', to: 'messages#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

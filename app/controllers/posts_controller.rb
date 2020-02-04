@@ -16,13 +16,15 @@ class PostsController < ApplicationController
 
     render json: posts
   end
-  private
 
-  def authorized_only_action
-    if !logged_in?
-      render json: { errors: 'You must log in to proceed' }, status: :unauthorized  
-    end
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+
+    render json: post 
   end
+
+  private
 
   def post_params
     params.require(:post).permit(:title, :post_type, :content, :repertoire)
