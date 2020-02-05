@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   post '/login', to: 'users#login'
   post '/validate', to: 'users#validate'
   get '/users', to: 'users#index' 
-  get '/users/:id/', to: 'users#show'
+  get '/users/:id', to: 'users#show'
+  patch '/users/:id', to: 'users#update'
 
 #post_routes
   post '/posts', to: 'posts#create'

@@ -51,8 +51,24 @@ class UsersController < ApplicationController
   end
 
 
+  def update
+    # byebug
+    user = User.find(params[:id])
+    if user 
+      user.update_attributes(user_params.select{|key,val| key != 'specialty'})
+      if user.field == 'vocalist'
+        user.vocal.update_attributes(user_params[:specialty])
+      else
+        user.instrumental.update_attributes(user_params[:specialty])
+      end
+      render json: user 
+    else
+      render json: { error: "Somthing didn't seem right"}, status: 404 
+    end
+  end
+
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :bio_content, :field)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :bio_content, :field, :specialty=>[:voice_type, :instrument])
   end
 end
