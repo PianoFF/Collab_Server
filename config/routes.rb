@@ -20,5 +20,13 @@ Rails.application.routes.draw do
   
 #message_routes
   post '/messages', to: 'messages#create'
+
+#vocal_routes
+  post '/vocals', to: 'vocals#create'
+
+#instrumental_routes
+  post '/instrumentals', to: 'instrumentals#create'
+
+#
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

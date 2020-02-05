@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authorized_only_action
   def create
     post = Post.create(post_params)
-    post.update(user: @current_user)
+    # post.update(user: @current_user)
 
     if post.valid? 
       render json: post 
@@ -27,6 +27,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :post_type, :content, :repertoire)
+    params.require(:post).permit(:title, :post_type, :content, :repertoire).merge(user: @current_user)
   end
 end
