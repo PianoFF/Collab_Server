@@ -55,24 +55,24 @@ class UsersController < ApplicationController
     # byebug
     user = User.find(params[:id])
     if user 
-      user.update_attributes(user_params.select{|key,val| key != 'specialty' && key != 'location'})
+      user.update(user_params.select{|key,val| key != 'specialty' && key != 'location'})
       if user_params[:location]
-        if !!user.location 
-          user.location.update_attributes(user_params[:location])
+        if user.location 
+          user.location.update(user_params[:location])
         else
-          byebug
+          # byebug
           Location.create(user_params[:location])
         end
       end
 
       if user_params[:specialty]
         if user.field == 'vocalist'
-          user.vocal.update_attributes(user_params[:specialty])
+          user.vocal.update(user_params[:specialty])
         else
-          user.instrumental.update_attributes(user_params[:specialty])
+          user.instrumental.update(user_params[:specialty])
         end
       end
-      
+
       render json: user 
     else
       render json: { error: "Somthing didn't seem right"}, status: :not_acceptable
