@@ -56,8 +56,12 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     if user 
       user.update_attributes(user_params.select{|key,val| key != 'specialty' && key != 'location'})
-
-      user.location.update_attributes(user_params[:location])
+      if user.location 
+        user.location.update_attributes(user_params[:location])
+      else
+        byebug
+        Location.create(user_params[:location])
+      end
 
       if user.field == 'vocalist'
         user.vocal.update_attributes(user_params[:specialty])
