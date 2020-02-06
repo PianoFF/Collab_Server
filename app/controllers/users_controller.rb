@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     if user 
       render json:user 
     else
-      render json: { error: "We can't find who you are looking for" }, status:404 
+      render json: { error: "We can't find who you are looking for" }, status: :not_acceptable
     end
   end
 
@@ -55,7 +55,10 @@ class UsersController < ApplicationController
     # byebug
     user = User.find(params[:id])
     if user 
-      user.update_attributes(user_params.select{|key,val| key != 'specialty'})
+      user.update_attributes(user_params.select{|key,val| key != 'specialty' && key != 'location'})
+
+      user.location.update_attributes(user_params[:location])
+
       if user.field == 'vocalist'
         user.vocal.update_attributes(user_params[:specialty])
       else
@@ -63,12 +66,22 @@ class UsersController < ApplicationController
       end
       render json: user 
     else
-      render json: { error: "Somthing didn't seem right"}, status: 404 
+      render json: { error: "Somthing didn't seem right"}, status: :not_acceptable
     end
   end
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :bio_content, :field, :specialty=>[:voice_type, :instrument])
+    params.require(:user).permit(
+      :first_name, 
+      :last_name, 
+      :email, 
+      :password, 
+      :password_confirmation, 
+      :bio_content, 
+      :field, 
+      :specialty=>[:voice_type, :instrument],
+      :location=>[:street, :city_town, :state_province, :country, :post_code]
+    )
   end
 end

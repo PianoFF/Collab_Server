@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 #instrumental_routes
   post '/instrumentals', to: 'instrumentals#create'
 
-#
+#location_routes
+  post '/locations', to: 'locations#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
