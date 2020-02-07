@@ -58,10 +58,10 @@ class UsersController < ApplicationController
       user.update(user_params.select{|key,val| key != 'specialty' && key != 'location'})
       if user_params[:location]
         if user.location 
+          # byebug
           user.location.update(user_params[:location])
         else
-          # byebug
-          Location.create(user_params[:location])
+          user.location = Location.create(user_params[:location])
         end
       end
 
