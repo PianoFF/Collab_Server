@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
   def index
     users = User.all 
-    render json: users 
+    render json: users, each_serializer: PublicUserSerializer     
   end 
 
   def show
@@ -74,7 +74,7 @@ class UsersController < ApplicationController
             user.vocal = Vocal.create(user_params[:specialty])
           end
         else
-          # byebug
+        # byebug
           if user.instrumental 
             user.instrumental.update(user_params[:specialty])
           else
