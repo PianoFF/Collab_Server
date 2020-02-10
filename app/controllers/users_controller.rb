@@ -56,6 +56,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     if user 
       user.update(user_params.select{|key,val| key != 'specialty' && key != 'location'})
+      
       if user_params[:location]
         if user.location 
           # byebug
@@ -67,9 +68,18 @@ class UsersController < ApplicationController
 
       if user_params[:specialty]
         if user.field == 'vocalist'
-          user.vocal.update(user_params[:specialty])
+          if user.vocal 
+            user.vocal.update(user_params[:specialty])
+          else
+            user.vocal = Vocal.create(user_params[:specialty])
+          end
         else
-          user.instrumental.update(user_params[:specialty])
+          # byebug
+          if user.instrumental 
+            user.instrumental.update(user_params[:specialty])
+          else
+            user.instrumental = Instrumental.create(user_params[:specialty])
+          end
         end
       end
 
