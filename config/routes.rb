@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 #message_routes
   post '/messages', to: 'messages#create'
   patch '/messages/:id', to: 'messages#update'
+  get '/messages', to:'messages#index'
 
 
 #vocal_routes
