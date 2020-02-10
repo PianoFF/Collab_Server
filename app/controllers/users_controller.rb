@@ -38,7 +38,8 @@ class UsersController < ApplicationController
 
   def index
     users = User.all 
-    render json: users, each_serializer: PublicUserSerializer     
+    ordered_users =  users.sort_by{ |user| user[:created_at]}.reverse
+    render json:  ordered_users, each_serializer: PublicUserSerializer     
   end 
 
   def show

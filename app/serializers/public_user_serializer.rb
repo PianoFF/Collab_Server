@@ -6,7 +6,8 @@
      :bio_content, 
      :field, 
      :location, 
-     :specialty
+     :specialty,
+     :created_at
 
    def specialty
     if object.field == "vocalist"

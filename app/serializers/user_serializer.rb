@@ -4,7 +4,9 @@ class UserSerializer < PublicUserSerializer
 
 
   def received_messages
-    ActiveModel::Serializer::CollectionSerializer.new(object.received_messages, each_serializer: MessageSerializer)
+    messages = object.received_messages
+    ordered_messages =  messages.sort_by{ |message| message[:created_at]}.reverse
+    ActiveModel::Serializer::CollectionSerializer.new(ordered_messages, each_serializer: MessageSerializer)
   end
 
 end
