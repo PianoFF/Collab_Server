@@ -1,5 +1,5 @@
 class MessageSerializer < ActiveModel::Serializer
-  attributes :id, :title, :content, :sender, :read, :updated_at, :received_at, :sender_delete, :receiver_delete
+  attributes :id, :title, :content, :sender, :recipient_id,:read, :updated_at, :received_at, :sender_delete, :receiver_delete
 
   def sender
     sender = User.find(object.sender_id)
