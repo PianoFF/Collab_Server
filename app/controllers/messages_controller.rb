@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
   end 
 
   def update
-    message = Message.find(params[:id])
+    message = Message.find(message_params[:id])
 
     if message 
       message.update(message_update_params)
@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params 
-    params.require(:message).permit(:title, :content, :recipient_id, :read, :sender_delete, :receiver_delete).merge(sender: @current_user)
+    params.require(:message).permit(:id,:title, :content, :recipient_id, :read, :sender_delete, :receiver_delete).merge(sender: @current_user)
   end
 
   def message_update_params

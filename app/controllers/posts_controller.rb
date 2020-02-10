@@ -13,8 +13,8 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.all 
-
-    render json: posts
+    ordered_posts =  posts.sort_by{ |post| post[:created_at]}.reverse
+    render json: ordered_posts
   end
 
   def destroy

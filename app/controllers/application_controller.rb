@@ -35,4 +35,6 @@ class ApplicationController < ActionController::API
         render json: { errors: 'You must log in to proceed' }, status: :unauthorized  
         end
     end
+
+    
 end
