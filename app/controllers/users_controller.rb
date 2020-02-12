@@ -51,6 +51,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def posts
+    user = User.find(params[:id])
+
+    if user   
+      my_posts = user.posts 
+
+      render json: my_posts 
+    else
+      render json: { error: 'Ooooopsie. Try posting something.'}
+    end
+  end
 
   def update
     # byebug

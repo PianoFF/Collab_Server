@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/users', to: 'users#index' 
   get '/users/:id', to: 'users#show'
   patch '/users/:id', to: 'users#update'
+  get '/users/:id/posts', to:'users#posts'
 
 #post_routes
   post '/posts', to: 'posts#create'
