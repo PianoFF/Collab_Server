@@ -17,6 +17,17 @@ class PostsController < ApplicationController
     render json: ordered_posts
   end
 
+  def update
+    post = Post.find(params[:id])
+    if post 
+      post.update(post_params)
+      render json: post 
+    else 
+       render json: { errors: post.errors.full_messages }, status: :not_acceptable
+    end
+  end
+
+  
   def destroy
     post = Post.find(params[:id])
     post.destroy

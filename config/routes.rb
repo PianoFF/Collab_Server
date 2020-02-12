@@ -13,11 +13,14 @@ Rails.application.routes.draw do
   get '/users', to: 'users#index' 
   get '/users/:id', to: 'users#show'
   patch '/users/:id', to: 'users#update'
+  get '/users/:id/posts', to:'users#posts'
+  get '/users/:id/received_messages', to: 'users#received_messages'
 
 #post_routes
   post '/posts', to: 'posts#create'
   get '/posts', to: 'posts#index'
-  delete '/posts/:id/', to: 'posts#destroy' 
+  delete '/posts/:id', to: 'posts#destroy' 
+  patch '/posts/:id', to: 'posts#update'
   
 #message_routes
   post '/messages', to: 'messages#create'
@@ -27,6 +30,7 @@ Rails.application.routes.draw do
 
 #vocal_routes
   post '/vocals', to: 'vocals#create'
+
 
 #instrumental_routes
   post '/instrumentals', to: 'instrumentals#create'
