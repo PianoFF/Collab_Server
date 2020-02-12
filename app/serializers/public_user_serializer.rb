@@ -5,20 +5,20 @@
      :email, 
      :bio_content, 
      :field, 
-     :location, 
-     :specialty,
+    #  :location, 
+    #  :specialty,
      :created_at
 
-   def specialty
-    if object.field == "vocalist"
-      object.vocal
-    else
-      object.instrumental
-    end
-  end
+  #  def specialty
+  #   if object.field == "vocalist"
+  #     object.vocal
+  #   else
+  #     object.instrumental
+  #   end
+  # end
 
-  def location
-    object.location
-  end
+  # def location
+  #   object.location
+  # end
 
   end

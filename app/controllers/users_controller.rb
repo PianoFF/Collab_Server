@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   def show
     user = User.find(params[:id])
     if user 
-      render json:user 
+      render json:user, serializer: UserSerializer
     else
       render json: { error: "We can't find who you are looking for" }, status: :not_acceptable
     end
@@ -63,6 +63,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def received_messages 
+    user = User.find(params[:id])
+
+    if user   
+      received_msg = user.received_messages
+      ordered_received_msg = received_msg.sort_by{ |msg| msg[:received_at]}.reverse
+      render json: ordered_received_msg
+    else
+      render json: { error: 'Ooooopsie. You have not heard from anyone yet.'}
+    end
+  end
+  
   def update
     # byebug
     user = User.find(params[:id])
