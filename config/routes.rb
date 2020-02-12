@@ -18,7 +18,8 @@ Rails.application.routes.draw do
 #post_routes
   post '/posts', to: 'posts#create'
   get '/posts', to: 'posts#index'
-  delete '/posts/:id/', to: 'posts#destroy' 
+  delete '/posts/:id', to: 'posts#destroy' 
+  patch '/posts/:id', to: 'posts#update'
   
 #message_routes
   post '/messages', to: 'messages#create'
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
 
 #vocal_routes
   post '/vocals', to: 'vocals#create'
+
 
 #instrumental_routes
   post '/instrumentals', to: 'instrumentals#create'

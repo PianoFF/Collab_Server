@@ -56,8 +56,8 @@ class UsersController < ApplicationController
 
     if user   
       my_posts = user.posts 
-
-      render json: my_posts 
+      ordered_my_posts = my_posts.sort_by{ |post| post[:created_at]}.reverse
+      render json: ordered_my_posts 
     else
       render json: { error: 'Ooooopsie. Try posting something.'}
     end
