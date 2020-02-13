@@ -17,6 +17,7 @@ class User < ApplicationRecord
   validates :field, inclusion: { in: %w(instrumentalist vocalist),
     message: "%{value} is not a valid option" }
   validates :bio_content, length: { maximum: 500}
+  validates :password, length: {in: 6..40}
   
 
   def token 

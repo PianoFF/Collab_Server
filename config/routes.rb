@@ -37,5 +37,8 @@ Rails.application.routes.draw do
 
 #location_routes
   post '/locations', to: 'locations#create'
+
+#file storage routes
+  post '/upload', to: 'users#file_upload'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

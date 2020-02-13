@@ -8,6 +8,7 @@ class UsersController < ApplicationController
       # refactored after moving issue_token to user.rb
       render json: user 
     else
+      # byebug
       render json: { errors: user.errors.full_messages }, status: :unauthorized
     end
   end
@@ -52,7 +53,7 @@ class UsersController < ApplicationController
   end
 
   def posts
-    user = User.find(params[:id])
+    user = @current_user
 
     if user   
       my_posts = user.posts 
@@ -77,8 +78,12 @@ class UsersController < ApplicationController
   
   def update
     # byebug
-    user = User.find(params[:id])
+    user = @current_user
     if user 
+      # user.cv.attach(user_params[:cv])
+      # user.cv.attach(user_params[:resume])
+      # user.cv.attach(user_params[:repertoire_list])
+
       user.update(user_params.select{|key,val| key != 'specialty' && key != 'location'})
       
       if user_params[:location]
@@ -113,9 +118,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def file_upload
+    case params[:file]
+    when "cv"
+      # byebug  
+      # @current_user.cv.attach()
+    when "repertoire_list"
+      user.repertoire_list
+    when "resume"
+      
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(
+      :id,
       :first_name, 
       :last_name, 
       :email, 
@@ -126,5 +144,9 @@ class UsersController < ApplicationController
       :specialty=>[:voice_type, :instrument],
       :location=>[:street, :city_town, :state_province, :country, :post_code]
     )
+  end
+
+  def upload_params
+    params.permit(:cv,:resume,:repertoire_list,:file)
   end
 end
