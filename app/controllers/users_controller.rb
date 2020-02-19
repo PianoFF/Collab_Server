@@ -80,10 +80,6 @@ class UsersController < ApplicationController
     # byebug
     user = @current_user
     if user 
-      # user.cv.attach(user_params[:cv])
-      # user.cv.attach(user_params[:resume])
-      # user.cv.attach(user_params[:repertoire_list])
-
       user.update(user_params.select{|key,val| key != 'specialty' && key != 'location'})
       
       if user_params[:location]
@@ -119,15 +115,38 @@ class UsersController < ApplicationController
   end
 
   def file_upload
-    case params[:file]
+    # byebug  
+    case upload_params[:file][:type]
     when "cv"
-      # byebug  
-      # @current_user.cv.attach()
+      if @current_user.cv.attached? 
+        @current_user.cv.purge
+      end
+      @current_user.cv.attach(upload_params[:file][:file])
+      @current_user.cv.save
+      render json: { message:"You have uploaded the file successflly" }
     when "repertoire_list"
-      user.repertoire_list
+      if @current_user.repertoire_list.attached?
+        @current_user.repertoire_list.purge
+      end
+      @current_user.repertoire_list.attach(upload_params[:file][:file])
+      @current_user.repertoire_list.save
+      render json: { message:"You have uploaded the file successflly" }
     when "resume"
-      
+      byebug
+      if @current_user.resume.attached?
+        @current_user.resume.purge_later
+      end
+      @current_user.resume.attach(upload_params[:file][:file])
+      @current_user.resume.save
+      render json: { message:"You have uploaded the file successflly" }
     end
+  end
+
+  def show_file
+    @user = User.find(params[:id])
+    render json: { url_resume: url_for(@user.resume), 
+                   url_cv: url_for(@user.cv),  
+                   url_rep: url_for(@user.repertoire_list)}
   end
 
   private
@@ -142,11 +161,11 @@ class UsersController < ApplicationController
       :bio_content, 
       :field, 
       :specialty=>[:voice_type, :instrument],
-      :location=>[:street, :city_town, :state_province, :country, :post_code]
+      :location=>[:street, :city_town, :state_province, :country, :post_code],
     )
   end
 
   def upload_params
-    params.permit(:cv,:resume,:repertoire_list,:file)
+    params.permit(:file=>[:file, :type, :title])
   end
 end

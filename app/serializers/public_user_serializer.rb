@@ -8,6 +8,7 @@
     #  :location, 
     #  :specialty,
      :created_at
+     
 
   #  def specialty
   #   if object.field == "vocalist"

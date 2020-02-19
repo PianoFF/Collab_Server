@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   patch '/users/:id', to: 'users#update'
   get '/users/:id/posts', to:'users#posts'
   get '/users/:id/received_messages', to: 'users#received_messages'
+  get '/users/:id/ff', to: 'users#show_file'
 
 #post_routes
   post '/posts', to: 'posts#create'
