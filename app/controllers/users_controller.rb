@@ -115,30 +115,40 @@ class UsersController < ApplicationController
   end
 
   def file_upload
-    # byebug  
     case upload_params[:file][:type]
     when "cv"
+      #  byebug 
       if @current_user.cv.attached? 
         @current_user.cv.purge
       end
       @current_user.cv.attach(upload_params[:file][:file])
       @current_user.cv.save
-      render json: { message:"You have uploaded the file successflly" }
+      cv_url = url_for(upload_params[:file])
+      render json: { 
+        message:"You have uploaded the file successflly"
+      }
     when "repertoire_list"
+      #  byebug 
       if @current_user.repertoire_list.attached?
         @current_user.repertoire_list.purge
       end
       @current_user.repertoire_list.attach(upload_params[:file][:file])
       @current_user.repertoire_list.save
-      render json: { message:"You have uploaded the file successflly" }
+      rep_url = url_for(upload_params[:file])
+      render json: { 
+        message:"You have uploaded the file successflly"
+      }
     when "resume"
-      byebug
+      # byebug
       if @current_user.resume.attached?
         @current_user.resume.purge_later
       end
       @current_user.resume.attach(upload_params[:file][:file])
       @current_user.resume.save
-      render json: { message:"You have uploaded the file successflly" }
+      resume_url = url_for(upload_params[:file])
+      render json: { 
+        message:"You have uploaded the file successflly"
+      }
     end
   end
 

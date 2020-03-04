@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   patch '/users/:id', to: 'users#update'
   get '/users/:id/posts', to:'users#posts'
   get '/users/:id/received_messages', to: 'users#received_messages'
-  get '/users/:id/ff', to: 'users#show_file'
+  
 
 #post_routes
   post '/posts', to: 'posts#create'
@@ -41,5 +41,6 @@ Rails.application.routes.draw do
 
 #file storage routes
   post '/upload', to: 'users#file_upload'
+  get '/users/:id/show_file', to: 'users#show_file'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
